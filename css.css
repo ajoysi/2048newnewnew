@@ -1,0 +1,64 @@
+/*开始游戏页面div样式表*/
+			#start{
+				width: 320px;
+				height: 480px;
+				/*到body的外边距*/
+				margin: auto;
+				/*相对定位*/
+				position: relative;
+				/*显示方式为块级元素*/
+				display: block;
+			}
+			/*开始游戏标签的样式*/
+			#begin{
+                /*给开始游戏文字定位*/
+				position: absolute;
+				top: 200px;
+				left: 60px;
+				/*设置文字，字体大小*/
+				font-size: 50px;
+				/*文字水平居总*/
+				text-align: center;
+				/*文字垂直居中*/
+				/*line-height: 50px;*/
+				
+			}
+
+			/*游戏页面标签*/
+			#wrap{
+
+				width: 320px;
+				height: 480px;
+				/*到body的外边距*/
+				margin: auto;
+				/*相对定位*/
+				position: relative;
+				/*显示方式为不显示*/
+				display: none;
+			}
+			/*给时间进度条标签加样式*/
+			/*时间进度条定位到背景图上面*/
+			#progress{
+				position: absolute;
+                width: 180px;
+				height: 17px;
+				left: 63px;
+				top: 65px;
+			}
+			/*积分标签样式*/
+			/*积分数字也是定位到背景图上面的*/
+			#score{
+               /*积分标签定位*/
+               position: absolute;
+				top: 8px;
+				left: 60px;
+                /*字体颜色*/
+				color: cyan;
+				/*字体大小*/
+				font-size: 25px;
+				/*把分数显示在所有试图的最上面*/
+				z-index: 1;
+			}
+ img{
+ 	position: absolute;
+ }

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css.css">
+	<!-- <script type="text/javascript" src="lang.js"></script> -->
+</head>
+<body>
+<!-- 开始游戏页面 -->
+		<div id="start">
+		  <!-- 开始游戏页面背景图 -->
+			<img src="imges/myrank_bg.jpg"/>
+			<!-- 开始游戏文字标签 -->
+			<div id="begin">开始游戏</div>
+		</div>
+<!-- 点击了开始游戏之后就切换到游戏开始的那一个界面，界面就会出现进度条等等 -->
+		<!-- 游戏页面 -->
+		<div id="wrap">
+		   <!-- 游戏积分标签 -->
+			<span id="score">0</span>
+			<!-- 游戏页面背景图 -->
+			<img id="bg" src="imges/game_bg.jpg"/>
+			<!-- 时间进度条 -->
+			<img id="progress" src="imges/progress.png" style="width: 180px;" />
+		</div>
+		<script type="text/javascript">
+			// 先找到对象，然后给对象创建事件，最后写函数
+			// 点击了开始游戏之后就切换到游戏开始的那一个界面
+			var start=document.getElementById('start');
+			var begin=document.getElementById('begin');
+			var wrap = document.getElementById('wrap');
+			
+			begin.onclick=function(){
+				wrap.style.display="block";
+				start.style.display="none";
+				
+				
+				// 开始游戏之后，开始改进度条的宽度
+				// 获取进度条的宽度，根据时间的推进改变进度条的宽度
+				// alert(pwidtn);
+				pro();
+			}
+				function pro(){
+
+			var progress=document.getElementById('progress');
+			// alert(pwidtn);
+				var pwidth=progress.offsetWidth;
+				var timerId =setInterval(function(){
+					pwidth-=1;
+					if (pwidth==0) {
+						clearInterval(timerId);
+						// var box= document.createElement("box");
+						// wrap.appendChild(box);
+						// var text = document.createTextNode("GAME OVER");
+						// box.appendChild(text);
+						
+					}
+					progress.style.width=pwidth+"px";
+					 // alert(pwidtn);
+
+				},100);
+				}
+
+			
+		// 	添加大灰狼图片，用到了生成人员列表的案例
+		// 	图片数组
+		// 大灰狼图片动态数组（01234543210）
+		// 大灰狼的图片组
+		var bigwolfImgArr1 = ['imges/h0.png','imges/h1.png','imges/h2.png','imges/h3.png','imges/h4.png','imges/h5.png','imges/h4.png','imges/h3.png','imges/h2.png','imges/h1.png','imges/h0.png'];
+		// 大灰狼被击打动态图
+		var djbigImgArr2 = ['imges/h6.png','imges/h7.png','imges/h8.png','imges/h9.png'];
+		// 小灰灰动态图数组
+		var xwolfImgArr1 = ['imges/x0.png','imges/x1.png','imges/x2.png','imges/x3.png','imges/x4.png','imges/x5.png','imges/x4.png','imges/x3.png','imges/x2.png','imges/x1.png','imges/x0.png'];
+		// 小灰灰被击打后的动态图数组
+		var xImgArr2 = ['imges/x6.png','imges/x7.png','imges/x8.png','imges/x9.png'];
+		//位置数组
+		var posArr = [{l:"98px",t:"115px"},{l:"17px",t:"160px"},{l:"15px",t:"220px"},{l:"30px",t:"293px"},{l:"122px",t:"273px"},
+		{l:"207px",t:"295px"},{l:"200px",t:"211px"},{l:"187px",t:"141px"},{l:"100px",t:"185px"}];
+		// 随机出现大狼所以调用一个随机函数
+		function show(length){
+        var random=parseInt(Math.random()*length);
+        	return random;
+        } 
+
+        setInterval(function(){
+        	
+        
+         // 添加大灰狼图片从01234543210，出现还需要时间控制，
+        // 某一个时间点出现某一张图片，依旧是加定时器
+        var imgs=document.createElement('img');
+        // imgs.src=bigwolfImgArr1[0];
+        wrap.appendChild(imgs);
+// 先给每个节点创建一个图，这里的图又是通过定时器控制，每一秒出一张静态图，从而看起来像是在节点添加了一个动态图
+
+        var i=0;
+        var bigwolfT =setInterval(function(){
+// 1s换一张图
+           i++;
+          imgs.src=bigwolfImgArr1[i];
+          if (i==10) {
+          	clearInterval(bigwolfT);
+          	wrap.removeChild(imgs);
+          }
+          
+
+        },150);
+         wrap.appendChild(imgs);
+// 还差狼随机出现，位置也是随机生成
+        var pos = show(9); 
+        imgs.style.top=posArr[pos].t;
+        imgs.style.left=posArr[pos].l;
+
+        imgs.onclick=function(){
+        	// // 打一次加一次分数
+        	// clearInterval(bigwolfT);
+        	var score=document.getElementById('score');
+        	var s =parseInt(score.innerHTML);
+        	s+=10;
+        	score.innerHTML=s;
+
+        	var j=-1;
+        	var clickSetTimer=setInterval(function(){
+        		j++;
+        		imgs.src=djbigImgArr2[j];
+        		if (a==9) {
+        			clearInterval(clickSetTimer);
+        			wrap.removeChild(img);
+        		}
+
+        	},150);
+
+        }
+
+        },1000);
+
+
+
+
+        // 实现了.055s小狼图片出现一次
+        setInterval(function(){
+        	 var imgs=document.createElement('img');
+               wrap.appendChild(imgs);
+               var i=0;
+               var xwolfT = setInterval(function(){
+               	i++;
+               	imgs.src= xwolfImgArr1[i];
+               	if(i==10){
+               		clearInterval(xwolfT);
+               		wrap.removeChild(imgs);
+               	}
+               },550);
+
+              
+               wrap.appendChild(imgs);
+
+               var pos2=show(9);
+               imgs.style.top=posArr[pos2].t;
+               imgs.style.left=posArr[pos2].l;
+
+               imgs.onclick=function(){
+               	var score=document.getElementById('score');
+        	var s =parseInt(score.innerHTML);
+        	s+=10;
+        	score.innerHTML=s;
+
+        	var j=-1;
+        	var clickSetTimer=setInterval(function(){
+        		j++;
+        		imgs.src=djbigImgArr2[j];
+        		if (a==9) {
+        			clearInterval(clickSetTimer);
+        			wrap.removeChild(img);
+        		}
+
+        	},150);
+
+          }
+        },1000);
+       
+
+		</script>
+</body>
+</html>
